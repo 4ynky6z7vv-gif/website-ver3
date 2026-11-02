@@ -1,8 +1,8 @@
 /* McQueen Portfolio - exported from Figma (node 3:3 "Home", 1440 x 5900) */
 *{box-sizing:border-box;}
 html,body{margin:0;padding:0;}
-body{background:#FAF7F2;height:5900px;overflow-x:hidden;}
-.page{position:relative;width:1440px;height:5900px;margin:0 auto;overflow:hidden;
+body{background:#FAF7F2;height:7200px;overflow-x:hidden;}
+.page{position:relative;width:1440px;height:7200px;margin:0 auto;overflow:hidden;
   background:#FAF7F2;transform-origin:top left;font-family:"Inter",sans-serif;}
 /* paper grain: 4% opacity multiply, tiled (as in the Figma layer) */
 .page::before{content:"";position:absolute;left:0;top:0;right:0;bottom:0;
@@ -124,8 +124,53 @@ body{background:#FAF7F2;height:5900px;overflow-x:hidden;}
 .rule2{left:24px;top:4360px;width:1392px;border-top:1px solid #000;z-index:108;}
 .arrow-work{left:425px;top:545px;width:78px;height:40px;z-index:109;}
 
+/* ============================================================
+   Contact / "How can I help" section
+   y-range ~ 5920 — 7100, sits below the Robot section.
+   Fonts follow the site's rule: headings → Inter (bold),
+   descriptions / handwritten notes → Caveat.
+   ============================================================ */
+.rule-contact{left:24px;top:5920px;width:1392px;border-top:1px solid #000;z-index:110;}
+.c-title{width:760px;font-family:"Inter",sans-serif;font-weight:700;font-size:80px;line-height:96.82px;letter-spacing:0.0px;color:rgba(0,0,0,1);text-align:left;z-index:111;transform:matrix(1.000000,0.000000,0.000000,1.000000,79.000000,6000.000000);transform-origin:0 0;}
+.c-sub{width:600px;font-family:"Caveat",cursive;font-weight:400;font-size:40px;line-height:50.4px;letter-spacing:0.0px;color:rgba(0,0,0,0.85);text-align:left;z-index:112;transform:matrix(0.999924,-0.012317,0.012317,0.999924,90.000000,6120.000000);transform-origin:0 0;}
+
+/* --- polaroid cards ---
+   Each card is a white frame (background + padding) holding a grey
+   inner panel; the tape is a child, pinned to the top corner so it
+   rotates together with the card and truly sits ON the photo frame. */
+.c-card1{width:540px;min-height:400px;background:rgba(250,248,245,1);box-shadow:0px 12px 40px rgba(0,0,0,0.08);transform:matrix(0.999263,0.038388,-0.038388,0.999263,140.000000,6260.000000);transform-origin:0 0;z-index:113;padding:26px 30px 30px;display:flex;flex-direction:column;gap:14px;}
+.c-card2{width:540px;min-height:400px;background:rgba(250,248,245,1);box-shadow:0px 12px 40px rgba(0,0,0,0.08);transform:matrix(0.998667,-0.051607,0.051607,0.998667,770.000000,6260.000000);transform-origin:0 0;z-index:114;padding:26px 30px 30px;display:flex;flex-direction:column;gap:14px;}
+
+/* tape: pinned to the top edge, half on / half off the frame */
+.c-tape1,.c-tape2{position:absolute;width:120px;height:32px;background:rgba(237,230,214,0.7);box-shadow:0px 2px 6px rgba(0,0,0,0.08);}
+.c-tape1{left:70px;top:-16px;transform:rotate(-5deg);}
+.c-tape2{left:340px;top:-16px;transform:rotate(4deg);}
+
+/* card typography */
+.c-card-num{font-family:"Caveat",cursive;font-weight:700;font-size:40px;line-height:1;color:rgba(123,94,144,1);text-align:left;}
+.c-card-title{font-family:"Inter",sans-serif;font-weight:700;font-size:34px;line-height:1.25;color:rgba(0,0,0,1);text-align:left;}
+.c-card-desc{font-family:"Caveat",cursive;font-weight:400;font-size:26px;line-height:1.4;color:rgba(0,0,0,0.85);text-align:left;}
+
+/* expandable toggle + detail */
+.c-toggle{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;margin-top:2px;padding:4px 12px;background:transparent;border:none;cursor:pointer;font-family:"Inter",sans-serif;font-weight:700;font-size:18px;color:rgba(0,0,0,1);}
+.c-toggle-label{display:inline-block;}
+.c-toggle-arrow{display:inline-block;font-size:22px;line-height:1;font-weight:400;transition:transform .3s ease;}
+.c-toggle[aria-expanded="true"] .c-toggle-arrow{transform:rotate(45deg);}
+.c-detail{display:flex;flex-direction:column;gap:6px;max-height:0;opacity:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1),opacity .3s ease;}
+.c-detail.open{max-height:320px;opacity:1;}
+.c-detail-line{font-family:"Caveat",cursive;font-weight:400;font-size:24px;line-height:1.35;color:rgba(0,0,0,0.8);text-align:left;}
+.c-detail-line b{font-family:"Inter",sans-serif;font-weight:700;font-size:19px;color:rgba(0,0,0,1);}
+
+/* bottom note + email + back-to-top */
+.c-note{width:500px;font-family:"Caveat",cursive;font-weight:400;font-size:30px;line-height:1.45;color:rgba(0,0,0,0.9);text-align:left;z-index:115;transform:matrix(1.000000,0.000000,0.000000,1.000000,90.000000,6900.000000);transform-origin:0 0;}
+.c-email{width:280px;font-family:"Inter",sans-serif;font-weight:700;font-size:28px;line-height:1.2;color:rgba(0,0,0,1);text-align:left;z-index:116;transform:matrix(1.000000,0.000000,0.000000,1.000000,820.000000,6970.000000);transform-origin:0 0;}
+.c-back{width:220px;font-family:"Inter",sans-serif;font-weight:700;font-size:26px;line-height:1.2;color:rgba(0,0,0,1);text-align:left;z-index:117;transform:matrix(1.000000,0.000000,0.000000,1.000000,820.000000,6900.000000);transform-origin:0 0;cursor:pointer;}
+.c-back::after{content:"";position:absolute;left:0;bottom:-4px;width:100%;height:3px;background:#000;scale:0 1;transform-origin:left center;transition:scale .25s ease;border-radius:2px;}
+.c-back:hover::after{scale:1 1;}
+.c-arrow{left:650px;top:7040px;width:78px;height:40px;z-index:118;}
+
 /* ---------- nav jump targets: keep a ~100px breathing gap from viewport top ---------- */
-.e12-173,.e16-295,.e16-341{scroll-margin-top:100px;}
+.e12-173,.e16-295,.c-title{scroll-margin-top:100px;}
 
 /* ============================================================
    Motion layer — scrapbook entrance / scroll / hover micro-interactions

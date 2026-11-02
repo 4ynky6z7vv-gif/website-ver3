@@ -118,6 +118,52 @@
   <div class="rule1"></div>
   <div class="rule2"></div>
   <svg class="arrow-work" viewBox="0 0 78 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3.00216 3.00215C5.72073 4.47918 32.0108 11.8064 52.2053 18.1579C55.4104 19.5929 58.6957 21.1792 61.7377 22.2451C64.7796 23.3109 67.4787 23.8082 73.6311 25.3047" stroke-width="6.00315" stroke-linecap="round" stroke-linejoin="round" stroke="#FC950D"/><path d="M74.9984 27.1281C73.7829 27.1462 70.6943 27.0989 68.6473 27.3982C65.9371 27.7944 63.7912 28.9846 62.7234 29.4674C61.7867 29.9718 59.7055 31.4344 56.7755 33.767C55.4822 34.9006 54.582 35.9326 53.6544 36.9959" stroke-width="6.00315" stroke-linecap="round" stroke-linejoin="round" stroke="#FC950D"/><path d="M74.2345 24.2309C74.2025 24.2029 73.4142 23.5152 71.3425 21.3076C67.9267 17.6676 66.1687 14.6404 65.4647 13.0869C63.3437 7.16516 63.1448 6.31017 63.0221 5.7396C62.9684 5.44005 62.932 5.1202 62.8946 4.79066" stroke-width="6.00315" stroke-linecap="round" stroke-linejoin="round" stroke="#FC950D"/></svg>
+
+  <!-- ============ Contact / "How can I help" section ============ -->
+  <div class="rule-contact"></div>
+  <div class="c-title">How can I help?</div>
+  <div class="c-sub">Reach out and let's do something together</div>
+
+  <!-- card 1: Tennis (polaroid with tape) -->
+  <div class="c-card1">
+    <div class="c-tape1"></div>
+    <span class="c-card-num">01</span>
+    <span class="c-card-title">Tennis: lesson or rally</span>
+    <span class="c-card-desc">I can teach you the basics of serve, forehand and backhand — or just rally with you as your hitting partner. Tennis123 ~4.0-4.5, playing since primary school.</span>
+    <button class="c-toggle" data-target="c-detail1" aria-expanded="false">
+      <span class="c-toggle-label">Expand details</span>
+      <span class="c-toggle-arrow">+</span>
+    </button>
+    <div class="c-detail" id="c-detail1">
+      <span class="c-detail-line"><b>Who:</b> friends who want to learn or find a practice partner.</span>
+      <span class="c-detail-line"><b>What:</b> basic strokes, feeding balls, or a friendly rally.</span>
+      <span class="c-detail-line"><b>Time:</b> about 1 hour, when I'm free &amp; you book the court.</span>
+      <span class="c-detail-line"><b>Start:</b> just message me to pick a time and a court.</span>
+    </div>
+  </div>
+
+  <!-- card 2: Chess (polaroid with tape) -->
+  <div class="c-card2">
+    <div class="c-tape2"></div>
+    <span class="c-card-num">02</span>
+    <span class="c-card-title">Chess: play a game</span>
+    <span class="c-card-desc">Play a full game with me, and I'll explain why I make each move along the way. My ELO is ~800 — I'm a beginner, come beat me.</span>
+    <button class="c-toggle" data-target="c-detail2" aria-expanded="false">
+      <span class="c-toggle-label">Expand details</span>
+      <span class="c-toggle-arrow">+</span>
+    </button>
+    <div class="c-detail" id="c-detail2">
+      <span class="c-detail-line"><b>Who:</b> friends who want to learn or practice chess.</span>
+      <span class="c-detail-line"><b>What:</b> a full game, with move-by-move commentary.</span>
+      <span class="c-detail-line"><b>Time:</b> about 30 min to 1 hour per game.</span>
+      <span class="c-detail-line"><b>Start:</b> just message me to book a game.</span>
+    </div>
+  </div>
+
+  <div class="c-note">I can also join you for a mobile game — Clash Royale, Honor of Kings, Identity V and more. Just name the game and the time.</div>
+  <div class="c-email">mcqueentao.com</div>
+  <div class="c-back" data-nav="top">Back to top</div>
+  <svg class="c-arrow" viewBox="0 0 78 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M74.9984 36.9979C72.2799 35.5208 45.9898 28.1936 25.7952 21.8421C22.5901 20.4071 19.3048 18.8208 16.2628 17.7549C13.2208 16.6891 10.5218 16.1918 4.36944 14.6953" stroke-width="6.00315" stroke-linecap="round" stroke-linejoin="round" stroke="#FC950D"/><path d="M3.00212 12.8719C4.21762 12.8538 7.3062 12.9011 9.3532 12.6018C12.0634 12.2054 14.2093 11.0154 15.2771 10.5326C16.2138 10.0282 18.295 8.5656 21.225 6.233C22.5183 5.0994 23.4185 4.0674 24.3461 3.0041" stroke-width="6.00315" stroke-linecap="round" stroke-linejoin="round" stroke="#FC950D"/><path d="M3.76602 15.7691C3.79802 15.7971 4.58632 16.4848 6.65802 18.6924C10.0738 22.3324 11.8318 25.3596 12.5358 26.9131C14.6568 32.8348 14.8557 33.6898 14.9784 34.2604C15.0321 34.56 15.0685 34.8798 15.1059 35.2093" stroke-width="6.00315" stroke-linecap="round" stroke-linejoin="round" stroke="#FC950D"/></svg>
 </div>
 <script>
 /* scale the 1440px design to the viewport width */
@@ -126,7 +172,7 @@
   function fit() {
     var s = Math.min(1, window.innerWidth / 1440);
     page.style.transform = 'scale(' + s + ')';
-    document.body.style.height = (5900 * s) + 'px';
+    document.body.style.height = (7200 * s) + 'px';
   }
   window.addEventListener('resize', fit);
   fit();
@@ -167,7 +213,7 @@
   var NAV_TARGETS = {
     '.e9-38': '.e16-295', // Work
     '.e9-39': '.e12-173', // About
-    '.e9-40': '.e16-341'  // Contact
+    '.e9-40': '.c-title'  // Contact
   };
   Object.keys(NAV_TARGETS).forEach(function (navSel) {
     var nav = $(navSel);
@@ -266,6 +312,17 @@
   mark('.e66-6', 'data-order', '0'); mark('.e66-8', 'data-order', '0'); mark('.e66-10', 'data-order', '1'); mark('.e16-299', 'data-order', '2'); mark('.e16-309', 'data-order', '3'); mark('.e16-327', 'data-order', '4');
   mark('.e16-341', 'data-anim', 'rise'); mark('.e16-341', 'data-order', '0');
 
+  // --- Contact / How can I help ---
+  mark('.c-title', 'data-anim', 'rise'); mark('.c-title', 'data-order', '0');
+  mark('.c-sub', 'data-anim', 'ink'); mark('.c-sub', 'data-order', '0');
+  mark('.c-card1', 'data-anim', 'drop'); mark('.c-card1', 'data-order', '0');
+  mark('.c-card2', 'data-anim', 'drop'); mark('.c-card2', 'data-order', '1');
+  mark('.c-tape1, .c-tape2', 'data-anim', 'press'); mark('.c-tape1', 'data-order', '0'); mark('.c-tape2', 'data-order', '1');
+  mark('.c-note', 'data-anim', 'rise'); mark('.c-note', 'data-order', '0');
+  mark('.c-email, .c-back', 'data-anim', 'rise'); mark('.c-email', 'data-order', '0'); mark('.c-back', 'data-order', '1');
+  mark('.c-arrow', 'data-anim', 'draw'); mark('.c-arrow', 'data-order', '0');
+  mark('.rule-contact', 'data-anim', 'wipe'); mark('.rule-contact', 'data-order', '0');
+
   // breathing (idle, after entrance)
   mark('.e16-336, .e16-319, .e16-320, .e16-323, .e16-324', 'data-breathe', '1');
 
@@ -300,7 +357,8 @@
   var sections = [
     { trigger: '.e12-173', els: '.e12-173, .e66-2, .e66-4, .e12-176, .e12-177, .e12-178, .e12-179, .e12-180, .e15-185, .e15-186, .e15-187, .e16-197, .e16-194, .e16-199, .e16-202, .e16-220, .e16-221, .e16-224, .e15-189, .e15-190, .e15-191, .e15-193, .e16-225, .e16-227, .e16-229, .e16-230, .e16-232, .e16-234, .e16-236, .e16-252, .e16-249' },
     { trigger: '.e16-257', els: '.e16-257, .e16-258, .e16-259, .e16-265, .e16-263, .e16-260, .e16-272, .e16-274, .e16-286, .e16-275, .e16-277, .e16-287, .e16-289, .e16-281, .e16-282, .rule2' },
-    { trigger: '.e16-295', els: '.e16-295, .e16-300, .e16-296, .e16-297, .e16-304, .e16-306, .e16-314, .e16-334, .e16-336, .e16-337, .e16-339, .e16-310, .e16-312, .e16-328, .e16-330, .e16-332, .e16-279, .e16-317, .e16-318, .e16-319, .e16-320, .e16-323, .e16-324, .e66-6, .e66-8, .e66-10, .e16-299, .e16-309, .e16-327, .e16-341' }
+    { trigger: '.e16-295', els: '.e16-295, .e16-300, .e16-296, .e16-297, .e16-304, .e16-306, .e16-314, .e16-334, .e16-336, .e16-337, .e16-339, .e16-310, .e16-312, .e16-328, .e16-330, .e16-332, .e16-279, .e16-317, .e16-318, .e16-319, .e16-320, .e16-323, .e16-324, .e66-6, .e66-8, .e66-10, .e16-299, .e16-309, .e16-327, .e16-341' },
+    { trigger: '.c-title', els: '.rule-contact, .c-title, .c-sub, .c-card1, .c-card2, .c-tape1, .c-tape2, .c-note, .c-email, .c-back, .c-arrow' }
   ];
 
   var io = new IntersectionObserver(function (entries) {
@@ -323,6 +381,27 @@
   $$('[data-breathe]').forEach(function (el, i) {
     el.style.animationDelay = (i * 0.4) + 's';
   });
+
+  /* ---------- 7b. contact expand/collapse toggle ---------- */
+  $$('.c-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var card = btn.closest('.c-card1, .c-card2');
+      var targetSel = btn.getAttribute('data-target');
+      var detail = document.getElementById(targetSel);
+      if (!detail) return;
+      var isOpen = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      detail.classList.toggle('open', !isOpen);
+    });
+  });
+
+  /* ---------- 7c. back-to-top ---------- */
+  var backBtn = $('.c-back');
+  if (backBtn) {
+    backBtn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  }
 
   /* ---------- 8. run ---------- */
   if (document.readyState === 'loading') {
