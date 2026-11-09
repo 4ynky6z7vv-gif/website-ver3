@@ -1,8 +1,8 @@
 /* McQueen Portfolio - exported from Figma (node 3:3 "Home", 1440 x 5900) */
 *{box-sizing:border-box;}
 html,body{margin:0;padding:0;}
-body{background:#FAF7F2;height:7200px;overflow-x:hidden;}
-.page{position:relative;width:1440px;height:7200px;margin:0 auto;overflow:hidden;
+body{background:#FAF7F2;height:5900px;overflow-x:hidden;}
+.page{position:relative;width:1440px;height:5900px;margin:0 auto;overflow:hidden;
   background:#FAF7F2;transform-origin:top left;font-family:"Inter",sans-serif;}
 /* paper grain: 4% opacity multiply, tiled (as in the Figma layer) */
 .page::before{content:"";position:absolute;left:0;top:0;right:0;bottom:0;
@@ -125,52 +125,193 @@ body{background:#FAF7F2;height:7200px;overflow-x:hidden;}
 .arrow-work{left:425px;top:545px;width:78px;height:40px;z-index:109;}
 
 /* ============================================================
-   Contact / "How can I help" section
-   y-range ~ 5920 — 7100, sits below the Robot section.
-   Fonts follow the site's rule: headings → Inter (bold),
-   descriptions / handwritten notes → Caveat.
+   Vinyl record interaction — a record spins forever; clicking it
+   pops a few music notes that drift away and fade out over ~1.5s.
+   Scrapbook voice: only translate/rotate/scale/opacity are animated
+   (elements carry Figma matrix() poses — never write `transform:`).
    ============================================================ */
-.rule-contact{left:24px;top:5920px;width:1392px;border-top:1px solid #000;z-index:110;}
-.c-title{width:760px;font-family:"Inter",sans-serif;font-weight:700;font-size:80px;line-height:96.82px;letter-spacing:0.0px;color:rgba(0,0,0,1);text-align:left;z-index:111;transform:matrix(1.000000,0.000000,0.000000,1.000000,79.000000,6000.000000);transform-origin:0 0;}
-.c-sub{width:600px;font-family:"Caveat",cursive;font-weight:400;font-size:40px;line-height:50.4px;letter-spacing:0.0px;color:rgba(0,0,0,0.85);text-align:left;z-index:112;transform:matrix(0.999924,-0.012317,0.012317,0.999924,90.000000,6120.000000);transform-origin:0 0;}
 
-/* --- polaroid cards ---
-   Each card is a white frame (background + padding) holding a grey
-   inner panel; the tape is a child, pinned to the top corner so it
-   rotates together with the card and truly sits ON the photo frame. */
-.c-card1{width:540px;min-height:400px;background:rgba(250,248,245,1);box-shadow:0px 12px 40px rgba(0,0,0,0.08);transform:matrix(0.999263,0.038388,-0.038388,0.999263,140.000000,6260.000000);transform-origin:0 0;z-index:113;padding:26px 30px 30px;display:flex;flex-direction:column;gap:14px;}
-.c-card2{width:540px;min-height:400px;background:rgba(250,248,245,1);box-shadow:0px 12px 40px rgba(0,0,0,0.08);transform:matrix(0.998667,-0.051607,0.051607,0.998667,770.000000,6260.000000);transform-origin:0 0;z-index:114;padding:26px 30px 30px;display:flex;flex-direction:column;gap:14px;}
+/* the spinning vinyl record, sitting on the music card */
+.vinyl{
+  position:absolute;left:934px;top:2776px;width:110px;height:110px;
+  border-radius:50%;cursor:pointer;z-index:110;padding:0;
+  background:transparent;border:none;
+}
+/* the record disc (grooves + centre label), forever spinning */
+.vinyl-disc{
+  position:absolute;inset:0;border-radius:50%;display:block;
+  background:
+    radial-gradient(circle at 50% 50%,#7B5E90 0 16%,#fff 16.5% 17.5%,#111 18% 100%);
+  box-shadow:0 6px 16px rgba(0,0,0,.28);
+  animation:vinyl-spin 3.2s linear infinite;
+}
+/* the vinyl grooves, layered above the label (kept out of the centre) */
+.vinyl-disc::before{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:repeating-radial-gradient(circle at 50% 50%,#1a1a1a 0 3px,#2e2e2e 3px 6px);
+  -webkit-mask:radial-gradient(circle at 50% 50%,transparent 0 17%,#000 17.5% 100%);
+  mask:radial-gradient(circle at 50% 50%,transparent 0 17%,#000 17.5% 100%);
+}
+/* small centre hole */
+.vinyl-disc::after{
+  content:"";position:absolute;left:50%;top:50%;width:6px;height:6px;
+  border-radius:50%;background:#FAF7F2;transform:translate(-50%,-50%);
+}
+/* subtle lift on press */
+.vinyl:active{scale:.94;transition:scale .12s ease;}
 
-/* tape: pinned to the top edge, half on / half off the frame */
-.c-tape1,.c-tape2{position:absolute;width:120px;height:32px;background:rgba(237,230,214,0.7);box-shadow:0px 2px 6px rgba(0,0,0,0.08);}
-.c-tape1{left:70px;top:-16px;transform:rotate(-5deg);}
-.c-tape2{left:340px;top:-16px;transform:rotate(4deg);}
+/* ============================================================
+   Click affordance — a soft, natural hint that the vinyl is tappable.
+   On hover (fine pointers) the disc lifts slightly, glows softly and
+   a tiny play glyph fades in at the centre, inviting a tap.
+   ============================================================ */
+@media (hover:hover) and (pointer:fine){
+  .vinyl{cursor:pointer;transition:scale .3s cubic-bezier(.16,1,.3,1);}
+  .vinyl:hover{scale:1.06;}
+  .vinyl:hover .vinyl-disc{box-shadow:0 10px 26px rgba(0,0,0,.34),0 0 0 6px rgba(252,149,13,.18);}
+  .vinyl-disc{transition:box-shadow .3s ease;}
+  /* a faint play glyph hint, visible only on hover */
+  .vinyl::after{
+    content:"";position:absolute;left:50%;top:50%;z-index:112;
+    width:0;height:0;pointer-events:none;
+    border-style:solid;border-width:10px 0 10px 17px;
+    border-color:transparent transparent transparent #FC950D;
+    transform:translate(-40%,-50%);
+    opacity:0;transition:opacity .3s ease;
+    filter:drop-shadow(0 1px 2px rgba(0,0,0,.25));
+  }
+  .vinyl:hover::after{opacity:.95;}
+}
 
-/* card typography */
-.c-card-num{font-family:"Caveat",cursive;font-weight:700;font-size:40px;line-height:1;color:rgba(123,94,144,1);text-align:left;}
-.c-card-title{font-family:"Inter",sans-serif;font-weight:700;font-size:34px;line-height:1.25;color:rgba(0,0,0,1);text-align:left;}
-.c-card-desc{font-family:"Caveat",cursive;font-weight:400;font-size:26px;line-height:1.4;color:rgba(0,0,0,0.85);text-align:left;}
+@keyframes vinyl-spin{
+  from{rotate:0deg;}
+  to{rotate:360deg;}
+}
 
-/* expandable toggle + detail */
-.c-toggle{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;margin-top:2px;padding:4px 12px;background:transparent;border:none;cursor:pointer;font-family:"Inter",sans-serif;font-weight:700;font-size:18px;color:rgba(0,0,0,1);}
-.c-toggle-label{display:inline-block;}
-.c-toggle-arrow{display:inline-block;font-size:22px;line-height:1;font-weight:400;transition:transform .3s ease;}
-.c-toggle[aria-expanded="true"] .c-toggle-arrow{transform:rotate(45deg);}
-.c-detail{display:flex;flex-direction:column;gap:6px;max-height:0;opacity:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1),opacity .3s ease;}
-.c-detail.open{max-height:320px;opacity:1;}
-.c-detail-line{font-family:"Caveat",cursive;font-weight:400;font-size:24px;line-height:1.35;color:rgba(0,0,0,0.8);text-align:left;}
-.c-detail-line b{font-family:"Inter",sans-serif;font-weight:700;font-size:19px;color:rgba(0,0,0,1);}
+/* the music notes that pop out on click */
+.vinyl-note{
+  position:absolute;left:50%;top:50%;z-index:111;
+  font-family:"Caveat",cursive;font-weight:700;font-size:30px;line-height:1;
+  translate:-50% -50%;rotate:0deg;
+  opacity:0;scale:.5;pointer-events:none;
+  text-shadow:0 1px 2px rgba(0,0,0,.12);
+}
+/* pop out, drift toward --dx/--dy, then fade away over ~1.5s */
+.vinyl-note.out{
+  animation:note-pop 1.5s cubic-bezier(.16,1,.3,1) forwards;
+}
+@keyframes note-pop{
+  0%   {opacity:0;scale:.5;rotate:0deg;}
+  18%  {opacity:1;scale:1.15;rotate:8deg;}
+  40%  {opacity:1;scale:1.05;rotate:-4deg;}
+  100% {opacity:0;scale:1.1;rotate:0deg;
+        translate:calc(-50% + var(--dx)) calc(-50% + var(--dy));}
+}
 
-/* bottom note + email + back-to-top */
-.c-note{width:500px;font-family:"Caveat",cursive;font-weight:400;font-size:30px;line-height:1.45;color:rgba(0,0,0,0.9);text-align:left;z-index:115;transform:matrix(1.000000,0.000000,0.000000,1.000000,90.000000,6900.000000);transform-origin:0 0;}
-.c-email{width:280px;font-family:"Inter",sans-serif;font-weight:700;font-size:28px;line-height:1.2;color:rgba(0,0,0,1);text-align:left;z-index:116;transform:matrix(1.000000,0.000000,0.000000,1.000000,820.000000,6970.000000);transform-origin:0 0;}
-.c-back{width:220px;font-family:"Inter",sans-serif;font-weight:700;font-size:26px;line-height:1.2;color:rgba(0,0,0,1);text-align:left;z-index:117;transform:matrix(1.000000,0.000000,0.000000,1.000000,820.000000,6900.000000);transform-origin:0 0;cursor:pointer;}
-.c-back::after{content:"";position:absolute;left:0;bottom:-4px;width:100%;height:3px;background:#000;scale:0 1;transform-origin:left center;transition:scale .25s ease;border-radius:2px;}
-.c-back:hover::after{scale:1 1;}
-.c-arrow{left:650px;top:7040px;width:78px;height:40px;z-index:118;}
+/* ============================================================
+   Play counter — a paper-collage tally card to the right of the
+   vinyl. The number rolls on every change; at milestones it recolours
+   and the click effect grows richer (see tiers in the JS).
+   ============================================================ */
+
+/* the tally card: torn-paper / taped-note look, gently rotated */
+.vinyl-counter{
+  position:absolute;left:1066px;top:2786px;z-index:110;
+  width:86px;height:96px;padding:8px 10px;
+  background:#FFFDF6;border-radius:2px;
+  box-shadow:0 4px 12px rgba(0,0,0,.14),0 1px 2px rgba(0,0,0,.08);
+  rotate:-3deg;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  pointer-events:none;
+}
+/* a strip of tape holding the card down (top edge) */
+.vinyl-counter::before{
+  content:"";position:absolute;left:50%;top:-10px;width:46px;height:18px;
+  transform:translateX(-50%) rotate(-2deg);
+  background:rgba(237,230,214,.75);
+  box-shadow:0 1px 3px rgba(0,0,0,.12);
+}
+/* small label */
+.counter-label{
+  font-family:"Caveat",cursive;font-weight:700;font-size:18px;line-height:1;
+  color:rgba(0,0,0,.55);letter-spacing:.02em;
+}
+/* the big tally number */
+.counter-num{
+  font-family:"Caveat",cursive;font-weight:700;font-size:52px;line-height:1;
+  color:#000;display:block;margin-top:2px;
+  transition:color .35s ease;
+}
+/* number roll: on change it lifts & fades in from below */
+.counter-num.roll{
+  animation:num-roll .45s cubic-bezier(.16,1,.3,1);
+}
+@keyframes num-roll{
+  0%  {opacity:0;translate:0 14px;scale:.7;}
+  60% {opacity:1;translate:0 -2px;scale:1.08;}
+  100%{opacity:1;translate:0 0;scale:1;}
+}
+/* milestone bounce: a single extra hop */
+.counter-num.bounce{
+  animation:num-bounce .5s cubic-bezier(.16,1,.3,1);
+}
+@keyframes num-bounce{
+  0%  {translate:0 0;}
+  30% {translate:0 -16px;scale:1.15;}
+  60% {translate:0 0;scale:.95;}
+  100%{translate:0 0;scale:1;}
+}
+
+/* vinyl scale pulse (tier 2+) */
+.vinyl.vinyl-pulse{animation:vinyl-pulse .5s cubic-bezier(.16,1,.3,1);}
+@keyframes vinyl-pulse{
+  0%  {scale:1;}
+  40% {scale:1.12;}
+  100%{scale:1;}
+}
+
+/* particle burst dots (tier 3+) */
+.vinyl-particle{
+  position:absolute;left:50%;top:50%;z-index:112;
+  width:8px;height:8px;border-radius:50%;
+  translate:-50% -50%;
+  opacity:0;scale:.4;pointer-events:none;
+}
+.vinyl-particle.out{
+  animation:particle-pop 1.3s cubic-bezier(.16,1,.3,1) forwards;
+}
+@keyframes particle-pop{
+  0%  {opacity:0;scale:.4;}
+  12% {opacity:1;scale:1;}
+  100%{opacity:0;scale:.5;
+       translate:calc(-50% + var(--dx)) calc(-50% + var(--dy));}
+}
+
+/* radiating glow ring (tier 4) */
+.vinyl-glow{
+  position:absolute;left:50%;top:50%;z-index:109;
+  width:40px;height:40px;border-radius:50%;
+  translate:-50% -50%;
+  border:3px solid #D4A017;
+  opacity:0;pointer-events:none;
+}
+.vinyl-glow{animation:glow-ring 1.1s ease-out forwards;}
+@keyframes glow-ring{
+  0%  {opacity:.9;scale:.5;border-width:4px;}
+  100%{opacity:0;scale:3.2;border-width:1px;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .vinyl-disc{animation:none;}
+  .vinyl-note.out{animation:none;opacity:0;}
+  .counter-num.roll,.counter-num.bounce{animation:none;}
+  .vinyl.vinyl-pulse{animation:none;}
+  .vinyl-particle.out{animation:none;opacity:0;}
+  .vinyl-glow{animation:none;}
+}
 
 /* ---------- nav jump targets: keep a ~100px breathing gap from viewport top ---------- */
-.e12-173,.e16-295,.c-title{scroll-margin-top:100px;}
+.e12-173,.e16-295,.e16-341{scroll-margin-top:100px;}
 
 /* ============================================================
    Motion layer — scrapbook entrance / scroll / hover micro-interactions
